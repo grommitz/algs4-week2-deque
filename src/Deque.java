@@ -12,7 +12,6 @@ public class Deque<Item> implements Iterable<Item> {
 	private class Node {
 		Item item;
 		Node next;
-		@SuppressWarnings("unused")
 		Node prev;
 		Node(Item item, Node prev, Node next) {
 			this.item = item;
@@ -42,6 +41,7 @@ public class Deque<Item> implements Iterable<Item> {
 		}
 		return sz;
 	}
+	
 	// insert the item at the front
 	public void addFirst(Item item) {
 		throwIfNull(item);
@@ -80,7 +80,8 @@ public class Deque<Item> implements Iterable<Item> {
 	public Item removeLast() {
 		throwIfEmpty();
 		Item item = back.item;
-		
+		back = back.prev;
+		back.next = null;
 		return item;
 	}
 
@@ -102,7 +103,7 @@ public class Deque<Item> implements Iterable<Item> {
 		}
 	}
 
-	public class DequeIteraor implements Iterator<Item> {
+	private class DequeIteraor implements Iterator<Item> {
 
 		private Node curr;
 		
