@@ -12,7 +12,6 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 	private Item[] q;
 	private int last = 0;
 	
-	@SuppressWarnings("unchecked")
 	public RandomizedQueue() {
 		q = (Item[]) new Object[4];
 	}
@@ -61,20 +60,21 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 			throw new NoSuchElementException();
 		}
 	}
-	@SuppressWarnings("unchecked")
+
 	private void grow() {
 		if (last == q.length - 1) {
 			System.out.println("growing from " + q.length + " to " + q.length * 2);
+			@SuppressWarnings("unchecked")
 			Item[] q2 = (Item[]) new Object[q.length * 2];
 			copy(q, q2);
 			q = q2;
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	private void shrink() {
 		if (last < q.length / 4) {
 			System.out.println("shrinking from " + q.length + " to " + q.length / 2);
+			@SuppressWarnings("unchecked")
 			Item[] q2 = (Item[]) new Object[q.length / 2];
 			copy(q, q2);
 			q = q2;
@@ -95,10 +95,9 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 	
 	private class RandomizedQueueIterator implements Iterator<Item> {
 
-		Item[] shuffled;
-		int iLast = 0;
+		private Item[] shuffled;
+		private int iLast = 0;
 		
-		@SuppressWarnings("unchecked")
 		public RandomizedQueueIterator() {
 			shuffled = (Item[]) new Object[last];
 			for (int i = 0; i < shuffled.length; ++i) {
@@ -146,7 +145,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 
 	private static void testEnqueueDequeue() {
 		RandomizedQueue<Integer> rq = initialised(100);
-		for (int i=0; i < 100; ++i) {
+		for (int i = 0; i < 100; ++i) {
 			System.out.println("#" + i + " -> " + rq.dequeue() + " (size = " + rq.size() + ")");
 		}
 	}

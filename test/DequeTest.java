@@ -13,6 +13,8 @@ import org.junit.Test;
 
 public class DequeTest {
 
+	Deque<Integer> dq = new Deque<>();
+
 	@Before
 	public void setUp() throws Exception {
 	}
@@ -23,20 +25,29 @@ public class DequeTest {
 
 	@Test
 	public void test3() {
-		Deque<Integer> dq = new Deque<>();
 		int sz = 0;
 		for (int i=0; i<50; ++i) {
 			int rand = StdRandom.uniform(10);
-			if (rand == 0) {
+			if (rand < 0 && dq.size() > 0) {
+				System.out.println(i + " remove");
 				dq.removeLast();
 				--sz;
 			} else {
+				System.out.println(i + " add " + rand);
 				dq.addFirst(rand);
 				++sz;
 			}
 			assertThat(dq.size(), is(sz));
 		}
 		
+	}
+
+	@Test
+	public void should_remove_last_element() {
+		dq.addFirst(1);
+		int i = dq.removeLast();
+		assertThat(i, is(1));
+		assertThat(dq.size(), is(0));
 	}
 
 }
