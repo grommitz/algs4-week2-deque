@@ -97,10 +97,10 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 		
 		public RandomizedQueueIterator() {
 			shuffled = (Item[]) new Object[last];
-			for (int i=0; i < shuffled.length; ++i) {
+			for (int i = 0; i < shuffled.length; ++i) {
 				shuffled[i] = q[i];
 			}
-			for (int i=0; i < shuffled.length; ++i) {
+			for (int i = 0; i < shuffled.length; ++i) {
 				int r = StdRandom.uniform(i+1);
 				exch(i, r, shuffled);			
 			}
@@ -114,9 +114,14 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 
 		@Override
 		public Item next() {
-			Item result = shuffled[iLast-1];
+			Item result = shuffled[iLast - 1];
 			shuffled[--iLast] = null;
 			return result;
+		}
+
+		@Override
+		public void remove() {
+			throw new UnsupportedOperationException();
 		}
 		
 	}
