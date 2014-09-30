@@ -73,6 +73,11 @@ public class Deque<Item> implements Iterable<Item> {
 		throwIfEmpty();
 		Item item = front.item;
 		front = front.next;
+		if (front == null) {
+			back = null;
+		} else {
+			front.prev = null;
+		}
 		return item;
 	}
 
@@ -81,7 +86,8 @@ public class Deque<Item> implements Iterable<Item> {
 		throwIfEmpty();
 		Item item = back.item;
 		if (back.prev == null) {
-			back = front = null;
+			back = null;
+			front = null;
 		} else {
 			back = back.prev;
 			back.next = null;
@@ -134,8 +140,23 @@ public class Deque<Item> implements Iterable<Item> {
 		public void remove() {
 			throw new UnsupportedOperationException(); 		
 		}
-
 	}
+	
+//	public String toString() {
+//		StringBuilder sb = new StringBuilder();
+//		if (front == null && back == null) {
+//			sb.append("[ empty ]");
+//		}
+//		Node n = front;
+//		while (n != null) {
+//			sb.append(String.format("[<-%s, %s, %s->]", 
+//					n.prev==null?"null":"P",
+//					n.item,
+//					n.next==null?"null":"N"));
+//			n = n.next;
+//		}
+//		return sb.toString();
+//	}
 
 	public static void main(String[] args) {
 

@@ -29,11 +29,9 @@ public class DequeTest {
 		for (int i=0; i<50; ++i) {
 			int rand = StdRandom.uniform(10);
 			if (rand < 0 && dq.size() > 0) {
-				System.out.println(i + " remove");
 				dq.removeLast();
 				--sz;
 			} else {
-				System.out.println(i + " add " + rand);
 				dq.addFirst(rand);
 				++sz;
 			}
@@ -49,20 +47,58 @@ public class DequeTest {
 			if (rand == 0) {
 				dq.addFirst(rand);
 				++sz;
+				System.out.println(i + " addFirst sz = " + sz);
 			} else if (rand == 1) {
 				dq.addLast(rand);
 				++sz;
+				System.out.println(i + " addLast sz = " + sz);
 			} else if (rand < 6 && sz > 0) {
 				dq.removeFirst();
 				--sz;
+				System.out.println(i + " removeFirst sz = " + sz);
 			} else if (sz > 0) {
 				dq.removeLast();
 				--sz;
+				System.out.println(i + " removeLast sz = " + sz);
 			}
 			assertThat(dq.size(), is(sz));
+			assertThat(dq.isEmpty(), is(sz == 0));
 		}
 	}
 
+//	@Test
+//	public void test6redux() {
+//		dq.addFirst(1);
+//		assertThat(dq.size(), is(1));
+//		dq.addFirst(2);
+//		assertThat(dq.size(), is(2));
+//		dq.removeLast();
+//		assertThat(dq.size(), is(1));
+//		dq.removeFirst();
+//		assertThat(dq.size(), is(0));
+//		dq.addFirst(3);
+//		assertThat(dq.size(), is(1));
+//		dq.removeFirst();
+//		assertThat(dq.size(), is(0));
+//		
+//		dq.addFirst(4);
+//		System.out.println(dq.toString());
+//		assertThat(dq.size(), is(1));
+//		
+//		dq.removeFirst();
+//		System.out.println(dq.toString());
+//		assertThat(dq.size(), is(0));
+//		
+//		dq.addLast(5);
+//		System.out.println(dq.toString());
+//		assertThat(dq.size(), is(1));
+//		
+//		dq.removeLast();
+//		System.out.println(dq.toString());
+//		assertThat(dq.isEmpty(), is(true));
+//		assertThat(dq.size(), is(0));
+//	}
+	
 	@Test
 	public void should_remove_last_element() {
 		dq.addFirst(1);
