@@ -39,7 +39,28 @@ public class DequeTest {
 			}
 			assertThat(dq.size(), is(sz));
 		}
-		
+	}
+	
+	@Test
+	public void test6() {
+		int sz = 0;
+		for (int i=0; i<50; ++i) {
+			int rand = StdRandom.uniform(10);
+			if (rand == 0) {
+				dq.addFirst(rand);
+				++sz;
+			} else if (rand == 1) {
+				dq.addLast(rand);
+				++sz;
+			} else if (rand < 6 && sz > 0) {
+				dq.removeFirst();
+				--sz;
+			} else if (sz > 0) {
+				dq.removeLast();
+				--sz;
+			}
+			assertThat(dq.size(), is(sz));
+		}
 	}
 
 	@Test
