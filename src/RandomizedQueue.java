@@ -1,5 +1,8 @@
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import java.util.logging.Logger;
+
+import jdk.nashorn.internal.runtime.Logging;
 
 /**
  * 
@@ -11,6 +14,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 
 	private Item[] q;
 	private int last = 0;
+	private static final Logger logger = Logging.getLogger("RQ");
 	
 	public RandomizedQueue() {
 		q = (Item[]) new Object[4];
@@ -30,12 +34,14 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 		}
 		grow();
 		q[last++] = item;
+		logger.fine("enqueue last = " + last + " item = " + item);
 	}
 	
 	// delete and return a random item
 	public Item dequeue() {
 		throwIfEmpty();
 		int r = StdRandom.uniform(last);
+		logger.fine("dequeue last = " + last + " r = " + r);
 		final Item result = q[r];
 		--last;
 		exch(r, last, q);
@@ -63,7 +69,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 
 	private void grow() {
 		if (last == q.length - 1) {
-			System.out.println("growing from " + q.length + " to " + q.length * 2);
+			//System.out.println("growing from " + q.length + " to " + q.length * 2);
 			@SuppressWarnings("unchecked")
 			Item[] q2 = (Item[]) new Object[q.length * 2];
 			copy(q, q2);
@@ -73,7 +79,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 
 	private void shrink() {
 		if (last < q.length / 4) {
-			System.out.println("shrinking from " + q.length + " to " + q.length / 2);
+			//System.out.println("shrinking from " + q.length + " to " + q.length / 2);
 			@SuppressWarnings("unchecked")
 			Item[] q2 = (Item[]) new Object[q.length / 2];
 			copy(q, q2);

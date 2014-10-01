@@ -66,39 +66,6 @@ public class DequeTest {
 		}
 	}
 
-//	@Test
-//	public void test6redux() {
-//		dq.addFirst(1);
-//		assertThat(dq.size(), is(1));
-//		dq.addFirst(2);
-//		assertThat(dq.size(), is(2));
-//		dq.removeLast();
-//		assertThat(dq.size(), is(1));
-//		dq.removeFirst();
-//		assertThat(dq.size(), is(0));
-//		dq.addFirst(3);
-//		assertThat(dq.size(), is(1));
-//		dq.removeFirst();
-//		assertThat(dq.size(), is(0));
-//		
-//		dq.addFirst(4);
-//		System.out.println(dq.toString());
-//		assertThat(dq.size(), is(1));
-//		
-//		dq.removeFirst();
-//		System.out.println(dq.toString());
-//		assertThat(dq.size(), is(0));
-//		
-//		dq.addLast(5);
-//		System.out.println(dq.toString());
-//		assertThat(dq.size(), is(1));
-//		
-//		dq.removeLast();
-//		System.out.println(dq.toString());
-//		assertThat(dq.isEmpty(), is(true));
-//		assertThat(dq.size(), is(0));
-//	}
-	
 	@Test
 	public void should_remove_last_element() {
 		dq.addFirst(1);
