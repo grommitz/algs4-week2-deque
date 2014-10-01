@@ -1,8 +1,5 @@
 import java.util.Iterator;
 import java.util.NoSuchElementException;
-import java.util.logging.Logger;
-
-import jdk.nashorn.internal.runtime.Logging;
 
 /**
  * 
@@ -14,7 +11,6 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 
 	private Item[] q;
 	private int last = 0;
-	private static final Logger logger = Logging.getLogger("RQ");
 	
 	public RandomizedQueue() {
 		q = (Item[]) new Object[4];
@@ -34,14 +30,12 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 		}
 		grow();
 		q[last++] = item;
-		logger.fine("enqueue last = " + last + " item = " + item);
 	}
 	
 	// delete and return a random item
 	public Item dequeue() {
 		throwIfEmpty();
 		int r = StdRandom.uniform(last);
-		logger.fine("dequeue last = " + last + " r = " + r);
 		final Item result = q[r];
 		--last;
 		exch(r, last, q);
@@ -123,6 +117,9 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 
 		@Override
 		public Item next() {
+			if (!hasNext()) {
+				throw new NoSuchElementException();
+			}
 			Item result = shuffled[iLast - 1];
 			shuffled[--iLast] = null;
 			return result;
