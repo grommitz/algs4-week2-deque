@@ -9,14 +9,16 @@ public class Subset {
 
 	public static void main(String[] args) {
 		
-		if (args.length < 2) {
-			System.err.println("Usage: java Subset k <strings>");
+		if (args.length != 1) {
+			System.err.println("Usage: java Subset <K>");
 			return;
 		}
 		int k = Integer.parseInt(args[0]);
 		RandomizedQueue<String> rq = new RandomizedQueue<>();
-		for (int i = 1; i < args.length; ++i) {
-			rq.enqueue(args[i]);
+
+		// when running interactively use CTRL+Z to end the input.
+		while (!StdIn.isEmpty()) {
+			rq.enqueue(StdIn.readString());
 		}
 		
 		Iterator<String> it = rq.iterator();
